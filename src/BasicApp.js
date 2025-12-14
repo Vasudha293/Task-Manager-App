@@ -59,11 +59,7 @@ function BasicApp() {
     }
   };
 
-  const moveTask = (taskId, newStatus) => {
-    setTasks(tasks.map(task => 
-      task.id === taskId ? { ...task, status: newStatus } : task
-    ));
-  };
+
 
   const deleteTask = (taskId) => {
     setTasks(tasks.filter(task => task.id !== taskId));
@@ -152,17 +148,16 @@ function BasicApp() {
       backgroundColor: 'white',
       padding: '32px 40px',
       display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center'
-    },
-    statsLeft: {
-      display: 'flex',
+      justifyContent: 'center',
       alignItems: 'center',
-      gap: '40px'
+      gap: '20px'
     },
     statItem: {
       textAlign: 'center',
-      minWidth: '80px'
+      flex: '1',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
     },
     statNumber: {
       fontSize: '32px',
@@ -180,11 +175,12 @@ function BasicApp() {
       width: '1px',
       height: '60px',
       backgroundColor: '#e0e0e0',
-      margin: '0 10px'
+      margin: '0 8px'
     },
     progressSection: {
       textAlign: 'right',
-      minWidth: '220px'
+      minWidth: '220px',
+      flex: '0 0 220px'
     },
     progressLabel: {
       fontSize: '14px',
@@ -430,40 +426,30 @@ function BasicApp() {
 
       {/* Stats Section */}
       <div style={styles.statsSection}>
-        <div style={styles.statsLeft}>
-          <div style={styles.statItem}>
-            <div style={styles.statNumber}>{stats.total}</div>
-            <div style={styles.statLabel}>Total Tasks</div>
-          </div>
-          
-          <div style={styles.divider}></div>
-          
-          <div style={styles.statItem}>
-            <div style={styles.statNumber}>{stats.todo}</div>
-            <div style={styles.statLabel}>To Do</div>
-          </div>
-          
-          <div style={styles.divider}></div>
-          
-          <div style={styles.statItem}>
-            <div style={styles.statNumber}>{stats.inProgress}</div>
-            <div style={styles.statLabel}>In Progress</div>
-          </div>
-          
-          <div style={styles.divider}></div>
-          
-          <div style={styles.statItem}>
-            <div style={styles.statNumber}>{stats.completed}</div>
-            <div style={styles.statLabel}>Completed</div>
-          </div>
+        <div style={styles.statItem}>
+          <div style={styles.statNumber}>{stats.total}</div>
+          <div style={styles.statLabel}>Total Tasks</div>
         </div>
         
-        <div style={styles.progressSection}>
-          <div style={styles.progressLabel}>Project Progress</div>
-          <div style={styles.progressBar}>
-            <div style={{ ...styles.progressFill, width: `${stats.progress}%` }}></div>
-          </div>
-          <div style={styles.progressPercent}>{stats.progress}%</div>
+        <div style={styles.divider}></div>
+        
+        <div style={styles.statItem}>
+          <div style={styles.statNumber}>{stats.todo}</div>
+          <div style={styles.statLabel}>To Do</div>
+        </div>
+        
+        <div style={styles.divider}></div>
+        
+        <div style={styles.statItem}>
+          <div style={styles.statNumber}>{stats.inProgress}</div>
+          <div style={styles.statLabel}>In Progress</div>
+        </div>
+        
+        <div style={styles.divider}></div>
+        
+        <div style={styles.statItem}>
+          <div style={styles.statNumber}>{stats.completed}</div>
+          <div style={styles.statLabel}>Completed</div>
         </div>
       </div>
 
