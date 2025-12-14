@@ -1,9 +1,6 @@
-// Task service with API integration
+// Task service - using localStorage for demo (can be upgraded to API later)
 class TaskService {
   constructor() {
-    this.baseURL = process.env.NODE_ENV === 'production' 
-      ? '/api' 
-      : 'http://localhost:3001/api';
     this.tasks = this.loadFromLocalStorage();
     this.nextId = this.getNextId();
   }
