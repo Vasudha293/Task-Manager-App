@@ -4,7 +4,10 @@ import TaskBoard from './components/TaskBoard';
 import TaskModal from './components/TaskModal';
 import { taskService } from './services/taskService';
 
+console.log('App component loaded');
+
 function App() {
+  console.log('App component rendering');
   const [tasks, setTasks] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
