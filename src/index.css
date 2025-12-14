@@ -1,12 +1,36 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind CSS - Safe loading */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Fallback styles */
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Ensure app is visible */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+/* Fallback if Tailwind doesn't load */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
 }
