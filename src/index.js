@@ -46,7 +46,7 @@ try {
     root.render(
       <React.StrictMode>
         <ErrorBoundary>
-          <AppSimple />
+          <App />
         </ErrorBoundary>
       </React.StrictMode>
     );
