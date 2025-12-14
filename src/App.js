@@ -1,22 +1,34 @@
 import React, { useState, useEffect } from 'react';
 
-// Lazy load components to prevent import errors
-let Navbar, TaskBoard, TaskModal, taskService;
-
-try {
-  Navbar = require('./components/Navbar').default;
-  TaskBoard = require('./components/TaskBoard').default;
-  TaskModal = require('./components/TaskModal').default;
-  taskService = require('./services/taskService').taskService;
-} catch (error) {
-  console.error('Component import error:', error);
-}
+// Import components at the top level
+import Navbar from './components/Navbar';
+import TaskBoard from './components/TaskBoard';
+import TaskModal from './components/TaskModal';
+import { taskService } from './services/taskService';
 
 function App() {
   console.log('🚀 App component rendering');
   
+  // Always call hooks at the top level
+  const [tasks, setTasks] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
+  const [filter, setFilter] = useState('all');
+  const [sortBy, setSortBy] = useState('created');
+  const [componentsLoaded, setComponentsLoaded] = useState(true);
+
+  useEffect(() => {
+    // Check if components are available and load tasks
+    try {
+      loadTasks();
+    } catch (error) {
+      console.error('Error loading tasks:', error);
+      setComponentsLoaded(false);
+    }
+  }, []);
+
   // If components failed to load, show fallback
-  if (!Navbar || !TaskBoard || !TaskModal || !taskService) {
+  if (!componentsLoaded) {
     return (
       <div style={{
         minHeight: '100vh',
@@ -61,15 +73,6 @@ function App() {
       </div>
     );
   }
-  const [tasks, setTasks] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingTask, setEditingTask] = useState(null);
-  const [filter, setFilter] = useState('all');
-  const [sortBy, setSortBy] = useState('created');
-
-  useEffect(() => {
-    loadTasks();
-  }, []);
 
   const loadTasks = async () => {
     try {
