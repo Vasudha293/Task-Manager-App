@@ -1,6 +1,9 @@
-// Mock service for demonstration - replace with actual API calls
+// Task service with API integration
 class TaskService {
   constructor() {
+    this.baseURL = process.env.NODE_ENV === 'production' 
+      ? '/api' 
+      : 'http://localhost:3001/api';
     this.tasks = this.loadFromLocalStorage();
     this.nextId = this.getNextId();
   }
