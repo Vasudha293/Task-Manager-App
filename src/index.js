@@ -86,20 +86,21 @@ function FallbackApp() {
   );
 }
 
-// Try to load the full app, fallback to simple version
-let AppToRender = FallbackApp;
+// Import the basic app that always works
+import BasicApp from './BasicApp';
+
+let AppToRender = BasicApp;
 
 try {
   // Try to import the full app
   const App = require('./App').default;
-  const taskService = require('./services/taskService');
   
   // If imports succeed, use the full app
   AppToRender = App;
   console.log('✅ Full app loaded successfully');
 } catch (error) {
-  console.warn('⚠️ Full app failed to load, using fallback:', error.message);
-  AppToRender = FallbackApp;
+  console.warn('⚠️ Full app failed to load, using basic app:', error.message);
+  AppToRender = BasicApp;
 }
 
 // Error boundary
